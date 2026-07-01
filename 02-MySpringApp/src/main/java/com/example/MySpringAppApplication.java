@@ -1,15 +1,15 @@
 package com.example;
 
-import com.example.config.AppConfig;
 import com.example.core.PaymentService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MySpringAppApplication {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        PaymentService paymentService = context.getBean(PaymentService.class);
+        PaymentService paymentService = context.getBean("paymentService", PaymentService.class);
+
         paymentService.processPayment();
 
         context.close();
