@@ -9,7 +9,7 @@ public class SpringEnvAndProfiles {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
-        context.getEnvironment().setActiveProfiles("prod");
+        context.getEnvironment().setActiveProfiles("dev");
 
         context.register(AppConfig.class);
         context.refresh();

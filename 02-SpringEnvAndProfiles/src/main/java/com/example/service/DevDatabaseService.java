@@ -17,5 +17,7 @@ public class DevDatabaseService implements DatabaseService {
     @Override
     public void connect() {
         System.out.println("Dev database is getting connected");
+        System.out.println("dbUrl: " + dbUrl);
+        System.out.println("dbUsername: " + dbUsername);
     }
 }
