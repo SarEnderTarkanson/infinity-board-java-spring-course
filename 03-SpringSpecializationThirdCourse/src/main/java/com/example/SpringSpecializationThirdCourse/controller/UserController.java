@@ -21,6 +21,11 @@ public class UserController {
 
     @PostMapping
     public String createUser(@RequestBody User user) {
+
+        if (user.getOrders() != null) {
+            user.getOrders().forEach(order -> order.setUser(user));
+        }
+
         userRepository.save(user);
         return "user created successfully";
     }
