@@ -1,16 +1,27 @@
 package com.example.SpringSpecializationThirdCourse.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.SpringSpecializationThirdCourse.entity.User;
+import com.example.SpringSpecializationThirdCourse.repository.UserRepository;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/users")
 public class UserController {
 
-    @GetMapping("/welcome")
-    public String Welcome() {
-        return "Welcome to the user API";
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    @GetMapping
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    @PostMapping
+    public String createUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "user created successfully";
+    }
 }
