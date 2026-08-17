@@ -1,46 +1,15 @@
 package com.example.SpringSpecializationThirdCourse.config;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
-@ConfigurationProperties(prefix = "app")
-@Validated
+@Configuration
 public class AppConfig {
 
-    @NotNull
-    private String name;
+    @Bean
+        public ModelMapper modelMapper(){
+            return new ModelMapper();
+        }
 
-    @NotNull
-    private String version;
-
-    @NotBlank
-    private String author;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }

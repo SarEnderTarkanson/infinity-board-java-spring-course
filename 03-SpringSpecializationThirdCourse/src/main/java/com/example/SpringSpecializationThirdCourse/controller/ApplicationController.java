@@ -25,9 +25,4 @@ public class ApplicationController {
         return "Welcome to " + appName + " and the version is " + appVersion;
     }
 
-    @GetMapping("/config")
-    public String config() {
-        return "Welcome to App Config" +  appConfig.getName() + ", Version: " + appConfig.getVersion() + ", Author: " + appConfig.getAuthor();
-    }
-
 }
