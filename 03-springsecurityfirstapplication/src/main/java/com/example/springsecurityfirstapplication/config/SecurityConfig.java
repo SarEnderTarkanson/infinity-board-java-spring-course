@@ -18,6 +18,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/public").permitAll()
+                        .requestMatchers("/api/secure").hasAnyRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
@@ -32,11 +33,16 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
 
-        var user = User.withUsername("admin")
+        var admin = User.withUsername("admin")
                 .password(passwordEncoder.encode("admin123"))
+                .roles("ADMIN")
+                .build();
+
+        var user = User.withUsername("user")
+                .password(passwordEncoder.encode("user123"))
                 .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(user);
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
