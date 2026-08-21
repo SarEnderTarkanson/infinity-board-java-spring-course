@@ -12,9 +12,19 @@ public class HelloController {
     public String publicApi() {
         return "Public API - No Authentication required";
     }
+
     @GetMapping("/secure")
     public String secureApi() {
         return "Secure API - Authentication is required";
+    }
+    @GetMapping("/admin/dashboard")
+    public String adminDashboard() {
+        return "Admin Dashboard - Admin role is required";
+    }
+
+    @GetMapping("/user/profile")
+    public String userProfile() {
+        return "User Profile - User role is required";
     }
 
 }
