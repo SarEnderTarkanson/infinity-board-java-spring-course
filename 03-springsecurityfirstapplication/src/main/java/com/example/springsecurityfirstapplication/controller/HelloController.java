@@ -1,10 +1,8 @@
 package com.example.springsecurityfirstapplication.controller;
 
+import com.example.springsecurityfirstapplication.security.JwtUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -38,4 +36,12 @@ public class HelloController {
         return "User Profile for " + id;
     }
 
+    @PostMapping("/auth")
+    public String login(@RequestParam String username, @RequestParam String password) {
+        if (("admin".equals(username) && "admin123".equals(password)) ||
+                ("user".equals(username) && "user123".equals(password))) {
+            return JwtUtil.generateToken(username);
+        }
+        throw new RuntimeException("Invalid credentials");
+    }
 }
